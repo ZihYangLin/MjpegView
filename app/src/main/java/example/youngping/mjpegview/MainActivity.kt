@@ -3,7 +3,7 @@ package example.youngping.mjpegview
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import example.youngping.mjpeg.MjpegView
+import com.yangping.mjpegview.MjpegView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(error: String) {
-                Toast.makeText(this@MainActivity, error, Toast.LENGTH_LONG).show()
+0g                Toast.makeText(this@MainActivity, error, Toast.LENGTH_LONG).show()
             }
         })
     }

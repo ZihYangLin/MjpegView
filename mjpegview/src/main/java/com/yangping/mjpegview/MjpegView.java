@@ -1,10 +1,7 @@
-package example.youngping.mjpeg;
+package com.yangping.mjpegview;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
+import android.os.*;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
@@ -68,7 +65,11 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback, Mj
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         mjpegRunnable.setRunning(false);
-        mHandlerThread.quitSafely();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mHandlerThread.quitSafely();
+        } else {
+            mHandlerThread.quit();
+        }
         mHandler = null;
     }
 

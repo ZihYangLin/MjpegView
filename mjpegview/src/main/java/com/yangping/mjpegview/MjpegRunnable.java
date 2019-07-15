@@ -1,4 +1,4 @@
-package example.youngping.mjpeg;
+package com.yangping.mjpegview;
 
 import android.graphics.*;
 import android.view.SurfaceHolder;
