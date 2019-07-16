@@ -16,7 +16,7 @@ Methods
 
 | Name | Return | Definition |
 | :---:   | :-:  | :-:  |
-| setFPSEnable() | void | Set whether to display fps text. |
+| setFPSEnable(boolean enable) | void | Set whether to display fps text. |
 | startPlayback(String url) | void | Start the video streaming. |
 | startPlayback(MjpegInputStream inputStream) | void | Start the video streaming. |
 | stopPlayback() | void |  Stop the video streaming. |
@@ -58,13 +58,13 @@ Download
 <dependency>
   <groupId>com.yangping</groupId>
   <artifactId>mjpegview</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <type>pom</type>
 </dependency>
 ```
 or Gradle ( jcenter ):
 ```groovy
-implementation 'com.yangping:mjpegview:1.0.1'
+implementation 'com.yangping:mjpegview:1.0.2'
 ```
 
 ### License
