@@ -13,6 +13,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
@@ -176,18 +177,34 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback, Mj
                 HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 
                 URL url = new URL(urls[0]);
-                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-                connection.setReadTimeout(10000);
-                connection.setConnectTimeout(10000);
-                connection.addRequestProperty(
-                        "User-Agent",
-                        "Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36"
-                );
-                connection.setInstanceFollowRedirects(true);
-                connection.setRequestMethod("GET");
-                if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK) {
-                    return connection.getInputStream();
+                if (url.getProtocol().toUpperCase().equals("HTTPS")){
+                    HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+                    connection.setReadTimeout(10000);
+                    connection.setConnectTimeout(10000);
+                    connection.addRequestProperty(
+                            "User-Agent",
+                            "Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36"
+                    );
+                    connection.setInstanceFollowRedirects(true);
+                    connection.setRequestMethod("GET");
+                    if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK) {
+                        return connection.getInputStream();
+                    }
+                }else {
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setReadTimeout(10000);
+                    connection.setConnectTimeout(10000);
+                    connection.addRequestProperty(
+                            "User-Agent",
+                            "Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36"
+                    );
+                    connection.setInstanceFollowRedirects(true);
+                    connection.setRequestMethod("GET");
+                    if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK) {
+                        return connection.getInputStream();
+                    }
                 }
+
             } catch (Exception e) {
                 e.printStackTrace();
                 mView.get().showFailure(e.getMessage());

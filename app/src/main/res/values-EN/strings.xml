@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MjpegView</string>
+    <string name="input_title">URL</string>
+    <string name="button_enter">connect</string>
+    <string name="button_cancel">disconnect</string>
+    <string name="button_default">Default</string>
+</resources>
