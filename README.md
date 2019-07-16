@@ -1,7 +1,15 @@
-# MjpegView
+# MjpegView<a href='https://play.google.com/store/apps/details?id=example.yangping.mjpegview'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="50px"/></a>
+
 MJPEG video streaming on Android.
 
 This library reference by the post of [stackoverflow](https://stackoverflow.com/questions/3205191/android-and-mjpeg).
+
+Sample
+===
+<img src="pngs/p1.png" width="246">
+<img src="pngs/p2.png" width="246">
+<img src="pngs/p3.png" width="246">
+<img src="pngs/p4.png" width="246">
 
 Methods
 ===

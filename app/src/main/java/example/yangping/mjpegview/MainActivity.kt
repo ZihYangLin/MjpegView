@@ -1,4 +1,4 @@
-package example.youngping.mjpegview
+package example.yangping.mjpegview
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
