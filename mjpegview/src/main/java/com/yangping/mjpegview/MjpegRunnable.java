@@ -113,9 +113,18 @@ class MjpegRunnable implements Runnable {
                 }
             }
         }
+        //解除畫布鎖定
+        try {
+            canvas = new WeakReference<Canvas>(surfaceHolder.lockCanvas());
+            canvas.get().drawColor(Color.BLACK);
+            surfaceHolder.unlockCanvasAndPost(canvas.get());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (inputStream != null) {
             try {
+
                 inputStream.close();
                 inputStream = null;
             } catch (IOException e) {
