@@ -65,7 +65,7 @@ public class MjpegInputStream extends DataInputStream {
     }
 
     // no more accessible
-    Bitmap readMjpegFrame() throws IOException {
+    public Bitmap readMjpegFrame() throws IOException {
         mark(FRAME_MAX_LENGTH);
         int headerLen = -1;
         try {
