@@ -100,17 +100,27 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback, Mj
     }
 
     public void startPlayback(MjpegInputStream inputStream) {
-        mHandler.removeCallbacks(mjpegRunnable);
-        mjpegRunnable.setRunning(true);
-        inputStream.setListener(this);
-        mjpegRunnable.setSurfaceSize(getWidth(), getHeight());
-        mjpegRunnable.setInputStream(inputStream);
-        mHandler.post(mjpegRunnable);
+        try {
+            mjpegRunnable.setRunning(true);
+            if (mHandler != null) {
+                mHandler.removeCallbacks(mjpegRunnable);
+            } else {
+                mHandler = new Handler(mHandlerThread.getLooper());
+            }
+            inputStream.setListener(this);
+            mjpegRunnable.setSurfaceSize(getWidth(), getHeight());
+            mjpegRunnable.setInputStream(inputStream);
+            mHandler.post(mjpegRunnable);
+        } catch (Exception e) {
+            listener.onFailure(e.getMessage());
+        }
     }
 
     public void stopPlayback() {
-        if (mHandler != null && mjpegRunnable != null) {
+        if (mjpegRunnable != null) {
             mjpegRunnable.setRunning(false);
+        }
+        if (mHandler != null) {
             mHandler.removeCallbacks(mjpegRunnable);
         }
     }
@@ -177,7 +187,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback, Mj
                 HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 
                 URL url = new URL(urls[0]);
-                if (url.getProtocol().toUpperCase().equals("HTTPS")){
+                if (url.getProtocol().toUpperCase().equals("HTTPS")) {
                     HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
                     connection.setReadTimeout(10000);
                     connection.setConnectTimeout(10000);
@@ -190,7 +200,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback, Mj
                     if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK) {
                         return connection.getInputStream();
                     }
-                }else {
+                } else {
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setReadTimeout(10000);
                     connection.setConnectTimeout(10000);
