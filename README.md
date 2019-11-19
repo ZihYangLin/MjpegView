@@ -58,13 +58,13 @@ Download
 <dependency>
   <groupId>com.yangping</groupId>
   <artifactId>mjpegview</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
   <type>pom</type>
 </dependency>
 ```
 or Gradle ( jcenter ):
 ```groovy
-implementation 'com.yangping:mjpegview:1.0.4'
+implementation 'com.yangping:mjpegview:1.0.5'
 ```
 
 ### License
