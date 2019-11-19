@@ -1,16 +1,16 @@
 package com.yangping.mjpegview;
 
 import android.content.Context;
-import android.os.*;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
@@ -18,6 +18,11 @@ import java.net.URL;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 public class MjpegView extends SurfaceView implements SurfaceHolder.Callback, MjpegInputStream.OnStreamFinishedListener {
     public interface OnMjpegCompletedListener {
@@ -112,7 +117,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback, Mj
             mjpegRunnable.setInputStream(inputStream);
             mHandler.post(mjpegRunnable);
         } catch (Exception e) {
-            listener.onFailure(e.getMessage());
+            listener.onFailure("" + e.getMessage());
         }
     }
 
@@ -126,7 +131,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback, Mj
     }
 
     private void showFailure(String error) {
-        this.listener.onFailure(error);
+        this.listener.onFailure("" + error);
     }
 
     public void setFPSEnable(boolean enable) {
@@ -217,7 +222,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback, Mj
 
             } catch (Exception e) {
                 e.printStackTrace();
-                mView.get().showFailure(e.getMessage());
+                mView.get().showFailure("" + e.getMessage());
             }
             return null;
         }
