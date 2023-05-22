@@ -54,17 +54,19 @@ OnMjpegCompletedListener
 
 Download
 ========
+
+maven
 ```xml
 <dependency>
-  <groupId>com.yangping</groupId>
+  <groupId>com.yangpingapps</groupId>
   <artifactId>mjpegview</artifactId>
-  <version>1.0.5</version>
-  <type>pom</type>
+  <version>1.0.8</version>
+  <type>aar</type>
 </dependency>
 ```
-or Gradle ( jcenter ):
+or Gradle ( mavenCentral ):
 ```groovy
-implementation 'com.yangping:mjpegview:1.0.5'
+implementation 'com.yangpingapps:mjpegview:1.0.8'
 ```
 
 ### License
